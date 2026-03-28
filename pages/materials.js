@@ -10,17 +10,65 @@ export default function Materials() {
   }, []);
 
   return (
-    <div style={{ padding: 40 }}>
-      <h1>素材库</h1>
+    <div style={{
+      padding: '40px',
+      fontFamily: '-apple-system'
+    }}>
+      
+      <h1 style={{ marginBottom: '30px' }}>素材库</h1>
 
-      {list.length === 0 && <p>暂无素材</p>}
+      {list.length === 0 && (
+        <p style={{ color: '#888' }}>暂无素材</p>
+      )}
 
-      {list.map(item => (
-        <div key={item.id} style={{ marginBottom: 20 }}>
-          <h3>{item.title}</h3>
-          <p>{item.author}</p>
-        </div>
-      ))}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+        gap: '20px'
+      }}>
+        
+        {list.map(item => (
+          <div key={item.id} style={{
+            background: '#fff',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+          }}>
+            
+            {/* 图片 / 视频 */}
+            {item.type === 'image' ? (
+              <img
+                src={item.url}
+                style={{ width: '100%', height: '180px', objectFit: 'cover' }}
+              />
+            ) : (
+              <video
+                src={item.url}
+                style={{ width: '100%', height: '180px', objectFit: 'cover' }}
+              />
+            )}
+
+            {/* 文本信息 */}
+            <div style={{ padding: '12px' }}>
+              <h3 style={{
+                fontSize: '16px',
+                marginBottom: '6px'
+              }}>
+                {item.title}
+              </h3>
+
+              <p style={{
+                fontSize: '12px',
+                color: '#666'
+              }}>
+                {item.author}
+              </p>
+            </div>
+
+          </div>
+        ))}
+
+      </div>
     </div>
   );
 }
