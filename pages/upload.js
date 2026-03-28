@@ -1,3 +1,4 @@
-expert default function Upload() {
+// TEST-123456
+export default function Upload() {
   return <div>Upload Page</div>;
 }
