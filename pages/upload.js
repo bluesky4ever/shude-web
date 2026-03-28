@@ -6,7 +6,7 @@ export default function Upload() {
   const [file, setFile] = useState(null);
 
   const handleSubmit = async () => {
-    console.log('按钮被点击了'); // 👈 调试用
+    console.log('clicked');
 
     if (!file) {
       alert('请选择文件');
@@ -18,15 +18,13 @@ export default function Upload() {
     formData.append('title', title);
 
     try {
-      const res = await axios.post(
+      await axios.post(
         'https://shude-server-1.onrender.com/upload',
         formData
       );
-
-      console.log(res);
       alert('上传成功');
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       alert('上传失败');
     }
   };
@@ -40,15 +38,17 @@ export default function Upload() {
         placeholder="标题"
         onChange={(e) => setTitle(e.target.value)}
       />
+
       <br /><br />
 
       <input
         type="file"
         onChange={(e) => setFile(e.target.files[0])}
       />
+
       <br /><br />
 
-      <button onClick={handleSubmit}>
+      <button onClick={() => handleSubmit()}>
         提交
       </button>
     </div>
