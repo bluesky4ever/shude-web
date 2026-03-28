@@ -1,3 +1,3 @@
-export default function Upload() {
+expert default function Upload() {
   return <div>Upload Page</div>;
 }
